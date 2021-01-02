@@ -1,0 +1,30 @@
+appPort: 3000
+
+deployment:
+  name: shipmanager-backend-deployment
+  namespace: default
+  replicas: 1
+
+ingress:
+  name: shipmanager-backend-ingress
+  host: shipmanager-backend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+
+service:
+  name: shipmanager-backend-service
+
+secret:
+  name: shipmanager-backend-secret
+  # Please set this value on terminal.
+  dbUri:
+
+pod:
+  name: shipmanager-backend-pod
+  env:
+    dbName: ship_manager
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi

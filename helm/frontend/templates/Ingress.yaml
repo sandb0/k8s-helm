@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+
+kind: Ingress
+
+metadata:
+  name: {{ .Values.ingress.name }}
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ .Values.service.name }}
+              servicePort: http-service
