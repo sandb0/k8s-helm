@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  frontend:
+  - apiVersion: v2
+    appVersion: 0.0.7
+    created: "2021-01-02T05:10:07.685171252-03:00"
+    description: ShipManager application frontend.
+    digest: 6b473589376649d32950dd4aa3a06cc9ea7a6c8c48450d5f399c355b5ea61b17
+    name: frontend
+    type: application
+    urls:
+    - https://azure-samples.github.io/aks-bootcamp-sample/charts/frontend-0.0.1.tgz
+    version: 0.0.1
+generated: "2021-01-02T05:10:07.684718692-03:00"

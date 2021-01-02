@@ -1,0 +1,31 @@
+appPort: 80
+
+deployment:
+  name: shipmanager-frontend-deployment
+  namespace: default
+  replicas: 1
+
+ingress:
+  name: shipmanager-frontend-ingress
+  host: shipmanager-frontend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+
+service:
+  name: shipmanager-frontend-service
+  port: 80
+
+configMap:
+  name: shipmanager-frontend-configmap
+  backendUri: http://shipmanager-backend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+
+volume:
+  name: shipmanager-frontend-volume
+
+pod:
+  name: shipmanager-frontend-pod
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
