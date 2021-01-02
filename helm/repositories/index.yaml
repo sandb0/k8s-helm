@@ -3,23 +3,23 @@ entries:
   backend:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2021-01-02T05:42:08.006868058-03:00"
+    created: "2021-01-02T05:57:11.807575053-03:00"
     description: ShipManager application backend.
     digest: 5edaf169f38f38991cca0bee87355711de81224adf2a2e8f1be3da3bda857705
     name: backend
     type: application
     urls:
-    - https://sandb0.github.io/k8s-helm/helm/repositories/backend-0.0.1.tgz
+    - http://sandb0.github.io/k8s-helm/helm/repositories/backend-0.0.1.tgz
     version: 0.0.1
   frontend:
   - apiVersion: v2
     appVersion: 0.0.7
-    created: "2021-01-02T05:42:08.0071686-03:00"
+    created: "2021-01-02T05:57:11.807854404-03:00"
     description: ShipManager application frontend.
     digest: 1d55423a979b5e4aec263e85712df9cf5524e9432aaccb779636230eafb628c3
     name: frontend
     type: application
     urls:
-    - https://sandb0.github.io/k8s-helm/helm/repositories/frontend-0.0.1.tgz
+    - http://sandb0.github.io/k8s-helm/helm/repositories/frontend-0.0.1.tgz
     version: 0.0.1
-generated: "2021-01-02T05:42:08.00635887-03:00"
+generated: "2021-01-02T05:57:11.807098607-03:00"
