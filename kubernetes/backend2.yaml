@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: shipmanager-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipmanager-backend-pod
+  template:
+    metadata:
+      labels:
+        app: shipmanager-backend-pod
+    spec:
+      containers:
+        - name: shipmanager-container
+          #image: shipmanagerregistry.azurecr.io/shipmanager-backend:v0.0.1
+          image: sandb0/shipmanager-backend:v0.0.1
+          ports:
+            - name: http
+              containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          env:
+            - name: DATABASE_MONGODB_URI
+              valueFrom: 
+                secretKeyRef:
+                  name: shipmanager-backend-secret
+                  key: MONGODB_URI
+            - name: DATABASE_MONGODB_DBNAME
+              value: ship_manager
+---
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: shipmanager-backend-service
+spec:
+  type: ClusterIP
+  selector:
+      app: shipmanager-backend-pod
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1beta1
+
+kind: Ingress
+
+metadata:
+  name: shipmanager-backend-ingress
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    - host: shipmanager-backend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: shipmanager-backend-service
+            servicePort: http

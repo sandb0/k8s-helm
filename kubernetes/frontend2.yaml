@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: shipmanager-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipmanager-frontend-pod
+  template:
+    metadata:
+      labels:
+        app: shipmanager-frontend-pod
+    spec:
+      volumes:
+        - name: shipmanager-frontend-volume
+          configMap:
+            name: shipmanager-frontend-configmap
+      containers:
+        - name: shipmanager-frontend-container
+          image: sandb0/shipmanager-frontend:v0.0.7
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: shipmanager-frontend-volume
+              mountPath: /usr/src/app/dist/configs
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+---
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: shipmanager-frontend-service
+spec:
+  type: ClusterIP
+  selector:
+      app: shipmanager-frontend-pod
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: networking.k8s.io/v1beta1
+
+kind: Ingress
+
+metadata:
+  name: shipmanager-frontend-ingress
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    - host: shipmanager-frontend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: shipmanager-frontend-service
+              servicePort: http
+---
+apiVersion: v1
+
+kind: ConfigMap
+
+metadata:
+  name: shipmanager-frontend-configmap
+data:
+  config.js: |
+    const config = (() => {
+      return {
+        'VUE_APP_BACKEND_BASE_URL': 'http://shipmanager-backend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io',
+      }
+    })();
