@@ -7,7 +7,7 @@ deployment:
 
 ingress:
   name: shipmanager-frontend-ingress
-  host: shipmanager-frontend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+  host: shipmanager-frontend-ingress.9d61b171e36d4fca9967.eastus.aksapp.io
 
 service:
   name: shipmanager-frontend-service
@@ -15,7 +15,7 @@ service:
 
 configMap:
   name: shipmanager-frontend-configmap
-  backendUri: http://shipmanager-backend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+  backendUri: http://shipmanager-backend-ingress.9d61b171e36d4fca9967.eastus.aksapp.io
 
 volume:
   name: shipmanager-frontend-volume

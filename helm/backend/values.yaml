@@ -7,7 +7,7 @@ deployment:
 
 ingress:
   name: shipmanager-backend-ingress
-  host: shipmanager-backend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io
+  host: shipmanager-backend-ingress.9d61b171e36d4fca9967.eastus.aksapp.io
 
 service:
   name: shipmanager-backend-service

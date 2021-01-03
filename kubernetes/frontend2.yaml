@@ -82,3 +82,30 @@ data:
         'VUE_APP_BACKEND_BASE_URL': 'http://shipmanager-backend-ingress.2081e1a6d49f4cd4a23a.eastus.aksapp.io',
       }
     })();
+---
+apiVersion: autoscaling/v2beta2
+
+kind: HorizontalPodAutoscaler
+
+metadata:
+  name: shipmanager-frontend-hpa
+spec:
+  maxReplicas: 8
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shipmanager-frontend-deployment
+  metrics:
+    - type: Resource
+      resource:
+          name: cpu
+          target:
+            type: Utilization
+            averageUtilization: 20
+    - type: Resource
+      resource:
+          name: memory
+          target:
+            type: Utilization
+            averageUtilization: 50
